@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chic Stylist | Personal Shopping & Styling</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-soft: #f9f6f2; /* Warna krem pucat khas brand mewah */
+            --accent: #d4b895; /* Warna gold/tan lembut */
+            --text-dark: #2c2c2c;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-soft);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* --- NAVBAR LUCU & SOFT (LV STYLE) --- */
+        header {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1200px;
+            z-index: 1000;
+        }
+
+        nav {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px); /* Efek kaca transparan */
+            padding: 15px 40px;
+            border-radius: 50px; /* Membuat navbar bulat lucu */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070') no-repeat center center/cover;
+            position: relative;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(249, 246, 242, 0.4); /* Overlay soft agar teks terbaca */
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 400;
+            font-style: italic;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .hero-content p {
+            font-size: 0.9rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+        }
+
+        .btn-luxury {
+            padding: 15px 40px;
+            background-color: var(--text-dark);
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            border-radius: 30px;
+            transition: 0.4s ease;
+        }
+
+        .btn-luxury:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        /* --- SERVICES (THE COLLECTION) --- */
+        .section {
+            padding: 100px 10%;
+            text-align: center;
+        }
+
+        .section-tag {
+            font-size: 0.7rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+        }
+
+        .services-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .service-item {
+            background: white;
+            padding: 40px;
+            border-radius: 20px; /* Sudut membulat lucu */
+            transition: 0.4s;
+            border: 1px solid #f0f0f0;
+        }
+
+        .service-item:hover {
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            transform: translateY(-10px);
+        }
+
+        .service-item h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .service-item p {
+            font-size: 0.85rem;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: white;
+            padding: 80px 10% 40px;
+            text-align: center;
+            border-top: 1px solid #eee;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+
+        .footer-links {
+            margin-bottom: 40px;
+        }
+
+        .footer-links a {
+            margin: 0 20px;
+            text-decoration: none;
+            color: #888;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            nav ul { display: none; } /* Sembunyikan menu di mobile untuk kesederhanaan */
+            .hero-content h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">Maison Style</div>
+            <ul>
+                <li><a href="#">The Services</a></li>
+                <li><a href="#">The Lookbook</a></li>
+                <li><a href="#">World of Styling</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <span class="section-tag">New Collection 2026</span>
+            <h1>Art of Dressing.</h1>
+            <p>Personal Styling & Wardrobe Curation</p>
+            <a href="#services" class="btn-luxury">Explore Now</a>
+        </div>
+    </section>
+
+    <section id="services" class="section">
+        <span class="section-tag">Explore Services</span>
+        <h2 class="section-title">The Styling Menu</h2>
+        
+        <div class="services-container">
+            <div class="service-item">
+                <h3>Personal Shopping</h3>
+                <p>Pengalaman belanja eksklusif yang dikurasi sesuai dengan siluet tubuh dan karakter unik Anda.</p>
+            </div>
+            <div class="service-item">
+                <h3>Wardrobe Overhaul</h3>
+                <p>Menata ulang lemari pakaian Anda menjadi sebuah galeri pribadi yang fungsional dan inspiratif.</p>
+            </div>
+            <div class="service-item">
+                <h3>Vacation Styling</h3>
+                <p>Koleksi outfit perjalanan yang dikemas sempurna untuk setiap destinasi internasional Anda.</p>
+            </div>
+            <div class="service-item">
+                <h3>Closet Organizing</h3>
+                <p>Sistem pengorganisasian lemari mewah yang memudahkan Anda memilih gaya setiap hari.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-logo">Maison Style</div>
+        <div class="footer-links">
+            <a href="#">Instagram</a>
+            <a href="#">Pinterest</a>
+            <a href="#">TikTok</a>
+        </div>
+        <p style="font-size: 0.7rem; color: #bbb; letter-spacing: 1px;">&copy; 2026 MAISON STYLE BY YOUR NAME. MADE WITH ELEGANCE.</p>
+    </footer>
+
+</body>
+</html>
