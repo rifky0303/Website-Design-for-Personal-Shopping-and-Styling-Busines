@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chic Stylist | Personal Shopping & Styling</title>
+    <title>Maison Style | Elevating Your Persona</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@200;300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
     <style>
         :root {
-            --bg-soft: #f9f6f2; /* Warna krem pucat khas brand mewah */
-            --accent: #d4b895; /* Warna gold/tan lembut */
-            --text-dark: #2c2c2c;
+            --bg-soft: #fcfaf8; 
+            --accent: #c5a37d; 
+            --text-dark: #1a1a1a;
             --white: #ffffff;
         }
 
@@ -19,7 +21,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            scroll-behavior: smooth;
+            cursor: none; /* Kita pakai custom cursor */
         }
 
         body {
@@ -27,256 +29,331 @@
             background-color: var(--bg-soft);
             color: var(--text-dark);
             overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        /* --- NAVBAR LUCU & SOFT (LV STYLE) --- */
+        /* --- CUSTOM CURSOR --- */
+        #cursor {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: var(--accent);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s;
+        }
+        #cursor-border {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--accent);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transition: all 0.2s ease-out;
+        }
+
+        /* --- NAVBAR UPGRADE --- */
         header {
             position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 1200px;
+            top: 0;
+            width: 100%;
             z-index: 1000;
+            padding: 30px 50px;
+            transition: 0.5s;
         }
 
         nav {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px); /* Efek kaca transparan */
-            padding: 15px 40px;
-            border-radius: 50px; /* Membuat navbar bulat lucu */
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-            border: 1px solid rgba(255,255,255,0.3);
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
         .logo {
             font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
+            font-size: 1.6rem;
             font-weight: 700;
-            letter-spacing: 3px;
+            letter-spacing: 5px;
             text-transform: uppercase;
         }
 
-        nav ul {
+        .nav-links {
             display: flex;
+            gap: 40px;
             list-style: none;
-            gap: 30px;
         }
 
-        nav ul li a {
+        .nav-links a {
             text-decoration: none;
             color: var(--text-dark);
-            font-size: 0.75rem;
-            font-weight: 500;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -5px;
+            left: 0;
+            background: var(--accent);
             transition: 0.3s;
         }
 
-        nav ul li a:hover {
-            color: var(--accent);
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
-        /* --- HERO SECTION --- */
+        /* --- HERO SECTION UPGRADE --- */
         .hero {
             height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            background: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070') no-repeat center center/cover;
+            overflow: hidden;
             position: relative;
         }
 
-        .hero::before {
-            content: "";
+        .hero-img {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(249, 246, 242, 0.4); /* Overlay soft agar teks terbaca */
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.85);
+            transform: scale(1.1); /* Untuk efek zoom saat load */
         }
 
         .hero-content {
             position: relative;
-            z-index: 1;
+            z-index: 10;
+            color: var(--white);
+            text-align: center;
         }
 
         .hero-content h1 {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(3rem, 8vw, 5rem);
+            font-size: clamp(4rem, 12vw, 8rem);
             font-weight: 400;
+            line-height: 0.9;
+            margin: 20px 0;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .hero-content span {
             font-style: italic;
-            margin-bottom: 20px;
-            line-height: 1.1;
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
         }
 
-        .hero-content p {
-            font-size: 0.9rem;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            margin-bottom: 40px;
-        }
-
-        .btn-luxury {
-            padding: 15px 40px;
-            background-color: var(--text-dark);
-            color: var(--white);
-            text-decoration: none;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            border-radius: 30px;
-            transition: 0.4s ease;
-        }
-
-        .btn-luxury:hover {
-            background-color: var(--accent);
-            transform: translateY(-3px);
-        }
-
-        /* --- SERVICES (THE COLLECTION) --- */
+        /* --- SERVICES UPGRADE --- */
         .section {
-            padding: 100px 10%;
-            text-align: center;
+            padding: 150px 10%;
         }
 
-        .section-tag {
-            font-size: 0.7rem;
-            letter-spacing: 5px;
-            text-transform: uppercase;
+        .grid-services {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 100px;
+            margin-top: 80px;
+        }
+
+        .service-card {
+            position: relative;
+            overflow: hidden;
+            padding-bottom: 40px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .service-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
             color: var(--accent);
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             display: block;
         }
 
-        .section-title {
+        .service-card h3 {
             font-family: 'Playfair Display', serif;
             font-size: 2.5rem;
-            margin-bottom: 50px;
+            margin-bottom: 20px;
+            font-weight: 400;
         }
 
-        .services-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
-        }
-
-        .service-item {
-            background: white;
-            padding: 40px;
-            border-radius: 20px; /* Sudut membulat lucu */
-            transition: 0.4s;
-            border: 1px solid #f0f0f0;
-        }
-
-        .service-item:hover {
-            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
-            transform: translateY(-10px);
-        }
-
-        .service-item h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-        }
-
-        .service-item p {
-            font-size: 0.85rem;
+        .service-card p {
             color: #666;
-            line-height: 1.8;
+            max-width: 400px;
+            font-weight: 300;
         }
 
-        /* --- FOOTER --- */
-        footer {
-            background: white;
-            padding: 80px 10% 40px;
-            text-align: center;
-            border-top: 1px solid #eee;
-        }
-
-        .footer-logo {
+        /* --- PARALLAX TEXT --- */
+        .scrolling-text {
             font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            margin-bottom: 30px;
+            font-size: 10vw;
+            white-space: nowrap;
+            color: transparent;
+            -webkit-text-stroke: 1px #d4b895;
+            opacity: 0.2;
+            padding: 50px 0;
         }
 
-        .footer-links {
-            margin-bottom: 40px;
-        }
-
-        .footer-links a {
-            margin: 0 20px;
+        /* --- BUTTON LUXE --- */
+        .btn-luxe {
+            display: inline-block;
+            padding: 20px 50px;
+            border: 1px solid var(--white);
+            color: var(--white);
             text-decoration: none;
-            color: #888;
-            font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 3px;
+            font-size: 0.7rem;
+            transition: 0.4s;
+            backdrop-filter: blur(5px);
         }
 
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            nav ul { display: none; } /* Sembunyikan menu di mobile untuk kesederhanaan */
-            .hero-content h1 { font-size: 2.5rem; }
+        .btn-luxe:hover {
+            background: var(--white);
+            color: var(--text-dark);
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 100px 50px;
+            background: #111;
+            color: var(--white);
+            text-align: center;
+        }
+
+        @media (max-width: 900px) {
+            .grid-services { grid-template-columns: 1fr; gap: 50px; }
+            header { padding: 20px; }
+            .nav-links { display: none; }
         }
     </style>
 </head>
 <body>
 
-    <header>
+    <div id="cursor"></div>
+    <div id="cursor-border"></div>
+
+    <header id="header">
         <nav>
-            <div class="logo">Maison Style</div>
-            <ul>
-                <li><a href="#">The Services</a></li>
-                <li><a href="#">The Lookbook</a></li>
-                <li><a href="#">World of Styling</a></li>
+            <div class="logo">MAISON</div>
+            <ul class="nav-links">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#">Archive</a></li>
+                <li><a href="#">About</a></li>
                 <li><a href="#">Contact</a></li>
             </ul>
         </nav>
     </header>
 
     <section class="hero">
+        <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070" class="hero-img" alt="Fashion">
         <div class="hero-content">
-            <span class="section-tag">New Collection 2026</span>
-            <h1>Art of Dressing.</h1>
-            <p>Personal Styling & Wardrobe Curation</p>
-            <a href="#services" class="btn-luxury">Explore Now</a>
+            <p style="letter-spacing: 8px; font-weight: 200; text-transform: uppercase;">Est. 2026</p>
+            <h1 id="hero-title">The <span>Art</span> of<br>Identity.</h1>
+            <a href="#services" class="btn-luxe">Begin the Journey</a>
         </div>
     </section>
 
+    <div class="scrolling-text">MODERN ELEGANCE • TIMELESS STYLE • CURATED LUXURY</div>
+
     <section id="services" class="section">
-        <span class="section-tag">Explore Services</span>
-        <h2 class="section-title">The Styling Menu</h2>
-        
-        <div class="services-container">
-            <div class="service-item">
-                <h3>Personal Shopping</h3>
-                <p>Pengalaman belanja eksklusif yang dikurasi sesuai dengan siluet tubuh dan karakter unik Anda.</p>
+        <div style="max-width: 600px;">
+            <span style="color: var(--accent); letter-spacing: 5px; text-transform: uppercase; font-size: 0.7rem;">Our Expertise</span>
+            <h2 style="font-family: 'Playfair Display', serif; font-size: 3.5rem; margin-top: 20px; font-weight: 400;">Tailored for the Exceptional.</h2>
+        </div>
+
+        <div class="grid-services">
+            <div class="service-card animate-up">
+                <span class="service-number">01</span>
+                <h3>Signature Shopping</h3>
+                <p>A private journey through the world's finest boutiques, curated specifically for your lifestyle.</p>
             </div>
-            <div class="service-item">
-                <h3>Wardrobe Overhaul</h3>
-                <p>Menata ulang lemari pakaian Anda menjadi sebuah galeri pribadi yang fungsional dan inspiratif.</p>
+            <div class="service-card animate-up">
+                <span class="service-number">02</span>
+                <h3>The Vault Re-edit</h3>
+                <p>Transforming your existing wardrobe into a masterpiece of organization and style.</p>
             </div>
-            <div class="service-item">
-                <h3>Vacation Styling</h3>
-                <p>Koleksi outfit perjalanan yang dikemas sempurna untuk setiap destinasi internasional Anda.</p>
+            <div class="service-card animate-up">
+                <span class="service-number">03</span>
+                <h3>Editorial Styling</h3>
+                <p>Red carpet, gala, or high-profile appearances. We ensure your presence is felt before you speak.</p>
             </div>
-            <div class="service-item">
-                <h3>Closet Organizing</h3>
-                <p>Sistem pengorganisasian lemari mewah yang memudahkan Anda memilih gaya setiap hari.</p>
+            <div class="service-card animate-up">
+                <span class="service-number">04</span>
+                <h3>Global Concierge</h3>
+                <p>Style management that follows you across continents, from Paris to New York.</p>
             </div>
         </div>
     </section>
 
     <footer>
-        <div class="footer-logo">Maison Style</div>
-        <div class="footer-links">
-            <a href="#">Instagram</a>
-            <a href="#">Pinterest</a>
-            <a href="#">TikTok</a>
-        </div>
-        <p style="font-size: 0.7rem; color: #bbb; letter-spacing: 1px;">&copy; 2026 MAISON STYLE BY YOUR NAME. MADE WITH ELEGANCE.</p>
+        <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 40px; letter-spacing: 5px;">MAISON STYLE</h2>
+        <p style="opacity: 0.5; font-weight: 200; letter-spacing: 2px;">BY RIFKY CANDRA</p>
     </footer>
 
+    <script>
+        // --- CUSTOM CURSOR LOGIC ---
+        const cursor = document.querySelector('#cursor');
+        const cursorBorder = document.querySelector('#cursor-border');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.top = `${e.clientY}px`;
+            cursor.style.left = `${e.clientX}px`;
+            
+            gsap.to(cursorBorder, {
+                x: e.clientX - 20,
+                y: e.clientY - 20,
+                duration: 0.5,
+                ease: "power2.out"
+            });
+        });
+
+        // --- GSAP ANIMATIONS ---
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero Load Animation
+        window.addEventListener('load', () => {
+            gsap.to(".hero-img", { scale: 1, duration: 2.5, ease: "power2.out" });
+            gsap.to("#hero-title", { opacity: 1, y: 0, duration: 1.5, delay: 0.5, ease: "power4.out" });
+        });
+
+        // Navbar Change on Scroll
+        ScrollTrigger.create({
+            start: 'top -80',
+            onEnter: () => gsap.to("header", { background: "rgba(255,255,255,0.9)", padding: "15px 50px", boxShadow: "0 10px 30px rgba(0,0,0,0.05)", duration: 0.3 }),
+            onLeaveBack: () => gsap.to("header", { background: "transparent", padding: "30px 50px", boxShadow: "none", duration: 0.3 })
+        });
+
+        // Scrolling Text Animation
+        gsap.to(".scrolling-text", {
+            xPercent: -50,
+            scrollTrigger: {
+                trigger: ".scrolling-text",
+                scrub: 1
+            }
+        });
+
+        // Cards Animation
+        gsap.utils.toArray(".animate-up").forEach(card => {
+            gsap.from(card, {
+                y: 100,
+                opacity: 0,
+                duration: 1,
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 90%",
+                }
+            });
+        });
+    </script>
 </body>
 </html>
